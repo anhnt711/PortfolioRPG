@@ -117,10 +117,7 @@
 /* Header (left panel) */
 .rpg-header { padding: 1rem 0 8px; }
 .rpg-header-row { display: flex; gap: 16px; align-items: flex-start; }
-.rpg-avatar-wrap { position: relative; width: 112px; height: 144px; border-radius: 12px; overflow: hidden; box-shadow: 0 0 0 2px rgba(251,191,36,.35); flex-shrink: 0; }
 .rpg-avatar { width: 100%; height: 100%; object-fit: cover; display: block; }
-.rpg-badge { position: absolute; left: -6px; top: -6px; transform: rotate(-8deg); font-size: 10px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 8px; background: rgba(148,163,184,.25); backdrop-filter: blur(2px); box-shadow: 0 2px 6px rgba(0,0,0,.25); }
-.rpg-badge-icon { width: 12px; height: 12px; }
 
 .rpg-meta { flex: 1; min-width: 0; }
 .rpg-name-row { display: flex; align-items: center; gap: 8px; }
@@ -163,3 +160,199 @@
 .rpg-item { display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(251,191,36,.25); background: rgba(255,255,255,.06); padding: 8px 10px; border-radius: 10px; }
 .rpg-item-key { color: rgba(226,232,240,.9); }
 .rpg-item-val { font-weight: 700; color: #fefce8; }
+
+/* ==== Avatar Shield (giống mẫu) ==== */
+.rpg-shield{
+  position: relative;
+  width: 150px;            /* bạn có thể đổi 136–160 tùy layout */
+  flex: 0 0 auto;
+}
+
+.rpg-ribbon{
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  z-index: 3;
+  transform: rotate(3deg);
+}
+.rpg-ribbon span{
+  display: inline-block;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 12px;
+  color: #fff;
+  background: linear-gradient(180deg,#b1873f,#8b6428);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 rgba(0,0,0,.25);
+}
+.rpg-ribbon::after{
+  /* đuôi ribbon */
+  content: "";
+  position: absolute;
+  right: 6px; top: 100%;
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #6f5121 transparent transparent transparent;
+  filter: brightness(0.9);
+}
+
+/* Khung khiên: nền + 2 đường viền */
+.rpg-shield-frame{
+  position: relative;
+  padding: 18px 14px 28px;
+  background:
+    radial-gradient(120% 100% at 50% 10%, rgba(255,255,255,.06), rgba(0,0,0,.08) 30%, transparent 60%),
+    linear-gradient(180deg, rgba(11,31,46,.85), rgba(6,20,34,.92));
+  clip-path: polygon(4% 0, 96% 0, 100% 6%, 100% 84%, 50% 100%, 0 84%, 0 6%);
+  border: 1px solid rgba(147, 197, 253, .35);
+  box-shadow:
+    inset 0 0 0 1px rgba(56,189,248,.15),
+    0 8px 24px rgba(2,8,23,.45);
+}
+.rpg-shield-frame::before,
+.rpg-shield-frame::after{
+  content:"";
+  position:absolute; inset:0;
+  clip-path: inherit;
+  border-radius: 6px;
+}
+.rpg-shield-frame::before{
+  border: 1px solid rgba(203,213,225,.28);   /* viền ngoài nhạt */
+  transform: scale(1.01);
+}
+.rpg-shield-frame::after{
+  border: 1px solid rgba(56,189,248,.4);     /* viền trong xanh */
+  transform: scale(0.985);
+}
+
+/* Vòng avatar tròn với viền sáng */
+.rpg-portrait-ring{
+  display:grid; place-items:center;
+  width: 92px; height: 92px;
+  margin: 6px auto 10px;
+  border-radius: 999px;
+  background: radial-gradient(70% 70% at 50% 40%, rgba(255,255,255,.35), rgba(255,255,255,.05));
+  box-shadow:
+    0 0 0 3px rgba(240,249,255,.7),
+    0 0 0 5px rgba(59,130,246,.25);
+}
+.rpg-portrait{
+  width: 84px; height: 84px;
+  border-radius: 999px;
+  object-fit: cover;
+  filter: contrast(1.02) saturate(1.05);
+}
+
+/* Caption trong khung */
+.rpg-shield-caption{
+  text-align:center;
+  margin-top: 6px;
+}
+.rpg-shield-name{
+  font-family: var(--rpg-head, ui-serif, "Spectral SC", serif);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .4px;
+  color: #cfe9ff;
+  text-shadow: 0 1px 0 rgba(0,0,0,.4);
+}
+.rpg-shield-role{
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, .85);
+}
+
+/* cho .rpg-portrait-ring làm mốc định vị */
+.rpg-portrait-ring{
+  position: relative; /* <-- thêm dòng này */
+  display: grid; place-items: center;
+  width: 92px; height: 92px;
+  margin: 6px auto 10px;
+  border-radius: 999px;
+  background: radial-gradient(70% 70% at 50% 40%, rgba(255,255,255,.35), rgba(255,255,255,.05));
+  box-shadow:
+    0 0 0 3px rgba(240,249,255,.7),
+    0 0 0 5px rgba(59,130,246,.25);
+}
+
+/* crest chung */
+.rpg-shield-crest{
+  display: grid; place-items: center;
+  width: 22px; height: 22px;
+  color: #e2e8f0;
+  background: linear-gradient(180deg,#1f3a5a,#0b1f2e);
+  border: 1px solid rgba(148,163,184,.35);
+  border-radius: 999px;
+  box-shadow: 0 2px 4px rgba(2,8,23,.35);
+}
+
+/* vị trí mới: dính vào vòng avatar, góc dưới-phải */
+.rpg-shield-crest--on-avatar{
+  position: absolute;
+  right: -4px;   /* hơi tràn ra ngoài cho “đè khung” */
+  bottom: -2px;
+}
+
+/* Gom sát các dòng bên phải avatar */
+.rpg-meta--compact .rpg-status--tight { margin-top: 2px; }
+.rpg-meta--compact .rpg-name-row .rpg-name-icon { margin-right: 6px; }
+
+.rpg-meta-sep{
+  margin: 8px 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+  border-radius: 1px;
+}
+
+/* Rank line kiểu Codingame */
+.rpg-rank{
+  display:flex; align-items: center; gap:8px;
+}
+.rpg-rank-icon{
+  width:16px; height:16px; opacity:.9;
+}
+.rpg-rank-texts{ line-height: 1.15; }
+.rpg-rank-line{ font-size: 14px; color: var(--rpg-fg); }
+.rpg-rank-tier{ font-weight: 700; }
+.rpg-rank-pts{ color: rgba(255,255,255,.8); font-weight: 500; }
+.rpg-rank-sub{ font-size: 12px; color: rgba(255,255,255,.65); margin-top:2px; }
+
+/* Màu theo tier (tuỳ biến theo theme của bạn) */
+.rpg-rank--bronze  .rpg-rank-tier{ color: #b87333; }
+.rpg-rank--silver  .rpg-rank-tier{ color: #c0c0c0; }
+.rpg-rank--gold    .rpg-rank-tier{ color: #f1c40f; }
+.rpg-rank--platinum .rpg-rank-tier{ color: #4fd1c5; }
+.rpg-rank--diamond .rpg-rank-tier{ color: #60a5fa; }
+.rpg-rank--legend  .rpg-rank-tier{ color: #c084fc; }
+
+.rpg-meta-sep{
+  margin: 8px 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(11,15,25,0) 0%,
+    #0b0f19 10%,
+    #FFD700 50%,
+    #0b0f19 90%,
+    rgba(11,15,25,0) 100%
+  );
+  border-radius: 1px;
+  box-shadow: 0 0 0.5px rgba(255,215,0,.5); /* ánh nhẹ cho “kim loại” */
+}
+
+/* icon + chữ rank lấy màu theo tier */
+.rpg-rank-icon{ width:16px; height:16px; color: #FFD700; }
+.rpg-rank-tier{ font-weight:700; color: var(--rank-accent, var(--rpg-fg)); }
+.rpg-rank-pts{ color: var(--rank-accent, var(--rpg-fg)); font-weight:500; }
+.rpg-rank-sub{ font-size:12px; color: rgba(255,255,255,.65); margin-top:2px; }
+.rpg-rank-brand{
+  display: flex; align-items: center;
+  height: 18px;           
+  margin-bottom: 10px;
+}
+.rpg-rank-brand-logo{
+  height: 16px;           /* chỉnh nhanh size logo */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}

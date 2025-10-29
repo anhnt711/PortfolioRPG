@@ -8,8 +8,7 @@ export default function Introduction() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
        <Hero
           name = "Nguyen Tien Anh"
-          title = "Front-end Engineer"
-          status = "On Sprint: Shipping v1"
+          status = "On Quest: Snake Game"
           avatarUrl = "/assets/avatar.jpg"
           rankScore = {15}
           flow = {86}            

@@ -1,8 +1,32 @@
 import { motion } from "framer-motion";
-import { Crown, Swords, Sparkles, Gauge, Quote, Scroll } from "lucide-react";
+import { Crown, Swords, Scroll, Medal, Sparkles, Gauge, Quote, Code2, TerminalSquare, Bug } from "lucide-react";
 import { tiers } from "../data/stats"
+import { CG_COLORS } from "../data/codingame"
+import  codingameLogoUrl  from "../assets/codingame-logo.png"
 
-export default function Hero({ name, title, status, avatarUrl, rankScore, flow, alignment, personal_motto, classToken}) {
+function tierKey(t="") {
+  return t.trim().toLowerCase();            // "grand master" giữ khoảng trắng
+}
+
+export default function Hero({ 
+  name, status, avatarUrl, rankScore, flow, alignment, personal_motto,
+  classToken = "Software Developer",
+  leader = true,
+  Engname = "Noah",
+  crest = "terminal",
+  codingame = { tier: "Disciple", points: 7923, label: "Global Rank" }, 
+}) {
+
+  const CrestIcon = {
+    code: Code2,
+    terminal: TerminalSquare,
+    bug: Bug,
+    swords: Swords,
+  }[crest] || Code2;
+
+  const key = tierKey(codingame?.tier || "unranked");
+  const rankAccent = codingame?.color || CG_COLORS[key] || CG_COLORS.unranked;
+  const rankSep = `linear-gradient(90deg, ${rankAccent}33, rgba(255,255,255,.06))`;
 
   const currentTier =
   tiers.find(t => rankScore >= t.min && rankScore <= t.max) || tiers[0];
@@ -28,23 +52,72 @@ export default function Hero({ name, title, status, avatarUrl, rankScore, flow, 
 
         <header className="rpg-header">
           <div className="rpg-header-row">
-            <div className="rpg-avatar-wrap">
-              <img src={avatarUrl} alt={`${name} portrait`} className="rpg-avatar" />
-              <div className="rpg-badge">
-                <Swords className="rpg-badge-icon" />
-                <span>{classToken}</span>
+            <div className="rpg-shield" role="img" aria-label={`${name} avatar badge`}>
+              {leader && (
+                <div className="rpg-ribbon">
+                  <span>{currentTier.label}</span>
+                </div>
+              )}
+
+              <div className="rpg-shield-frame">
+                {/* Vòng avatar */}
+                <div className="rpg-portrait-ring">
+                  <img src={avatarUrl} alt={`${name} portrait`} className="rpg-portrait" />
+
+                  {/* Crest mới — góc dưới phải của avatar */}
+                  <div className="rpg-shield-crest rpg-shield-crest--on-avatar" title={classToken}>
+                    <CrestIcon size={14} />
+                  </div>
+                </div>
+
+                <div className="rpg-shield-caption">
+                  <div className="rpg-shield-name">{Engname}</div>
+                  <div className="rpg-shield-role">{classToken}</div>
+                </div>
               </div>
             </div>
 
-            <div className="rpg-meta">
+
+            <div
+              className="rpg-meta rpg-meta--compact"
+              style={{ "--rank-accent": rankAccent, "--rank-sep": rankSep }}
+            >
+              {/* Name */}
               <div className="rpg-name-row">
                 <Crown className="rpg-name-icon" />
                 <h2 className="rpg-h2">{name}</h2>
               </div>
-              <p className="rpg-subtitle">{title} • {alignment}</p>
-              <div className="rpg-status">
+
+              {/* On Quest (icon cuộn trục) */}
+              <div className="rpg-status rpg-status--tight">
                 <Scroll className="rpg-status-icon" />
                 <span>{status}</span>
+              </div>
+
+              {/* separator */}
+              <div className="rpg-meta-sep" />
+
+              <div className="rpg-rank-brand" aria-label="Rank source: CodinGame">
+                <img
+                  src={codingameLogoUrl}
+                  alt="CodinGame"
+                  className="rpg-rank-brand-logo"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              {/* CodinGame Rank */}
+              <div className="rpg-rank">
+                <Medal className="rpg-rank-icon" />
+                <div className="rpg-rank-texts">
+                  <div className="rpg-rank-line">
+                    <strong className="rpg-rank-icon"> Rank: <label className="rpg-rank-tier">{codingame.tier || "Unranked"}</label></strong>
+                    {codingame.points != null && (
+                      <span className="rpg-rank-pts"> ({codingame.points.toLocaleString()} pts)</span>
+                    )}
+                  </div>
+                  {codingame.label && <div className="rpg-rank-sub">{codingame.label}</div>}
+                </div>
               </div>
             </div>
           </div>
