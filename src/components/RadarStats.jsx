@@ -1,8 +1,3 @@
-
-// ===============================
-// File: RadarStats.jsx
-// ===============================
-// Right panel – unified style to match the left Hero card
 import {
   RadarChart,
   PolarGrid,

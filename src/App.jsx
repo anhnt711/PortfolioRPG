@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Section from "./components/Section";
 import Introduction from "./sections/Introduction"; 
+import Inventory from "./sections/Inventory"; 
 import Projects from "./sections/Projects";
 import Contact from "./sections/Contact";
 import SkillsTree from "./sections/SkillsTree";
@@ -27,6 +28,9 @@ export default function App() {
             <Introduction />
           </Section>
 
+          <Section id="info" title="Inventory" subline="Tools & Utilities" variant="scroll" align="left">
+            <Inventory />
+          </Section>
           {/* <Section id="skills" title="Skills Tree">
             <SkillsTree />
           </Section> */}

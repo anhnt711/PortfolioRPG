@@ -1,0 +1,93 @@
+/* =============== Scroll horizontal =============== */
+.inventory-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+  scroll-snap-type: x mandatory;
+  mask-image: linear-gradient(90deg, transparent 0, #000 24px, #000 calc(100% - 24px), transparent 100%);
+}
+
+.inventory-row {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.5rem;
+}
+
+/* =============== Slot (item) smaller version =============== */
+.slot {
+  width: 80px;
+  height: 80px;
+  flex: 0 0 80px;
+  scroll-snap-align: start;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .slot {
+    width: 90px;
+    height: 90px;
+    flex: 0 0 90px;
+  }
+}
+
+.slot:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.slot-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  pointer-events: none;
+}
+
+.slot-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: rgba(18, 18, 18, 0.5);
+  border-radius: 0.5rem;
+}
+
+.slot-img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(255, 233, 166, 0.25));
+}
+
+.slot-name {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.8);
+  color: #ffe9a6;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(180, 140, 40, 0.4);
+  white-space: nowrap;
+}
+
+/* Scrollbar style */
+.inventory-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.inventory-scroll::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.35);
+  border-radius: 10px;
+}
+.inventory-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.flow-hidden{
+    overflow:hidden;
+}
+
