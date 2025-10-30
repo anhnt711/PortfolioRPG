@@ -1,9 +1,7 @@
-# Portfolio RPG — MWE
+## Live
+- Production: portfolio-rpg-nine.vercel.app
 
-
-**Production:** portfolio-rpg-nine.vercel.app
-
-## Dev
+## Build
 ```bash
 npm ci
 npm run build
