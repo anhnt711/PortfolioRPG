@@ -1,7 +1,7 @@
 // src/sections/Introduction.jsx
-import Hero from "../components/Hero";
-import RadarStats from "../components/RadarStats";
-import { heroInfo, radarStats } from "../data/stats";
+import Hero from "./Hero";
+import RadarStats from "./RadarStats";
+import { heroInfo, radarStats } from "@data/stats";
 
 export default function Introduction() {
   return (

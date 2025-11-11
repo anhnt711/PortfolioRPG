@@ -1,46 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-// khung màu "rarity" kiểu RPG
-const rarityStyle = {
-  common:  "from-stone-800/70 to-stone-900/80 border-stone-600/60 ring-stone-400/20",
-  rare:    "from-sky-900/60   to-stone-900/80 border-sky-600/60   ring-sky-400/30",
-  epic:    "from-violet-900/60 to-stone-900/80 border-violet-600/60 ring-violet-400/30",
-  legendary:"from-amber-900/60 to-stone-900/80 border-amber-600/60  ring-amber-400/30",
-};
-
-// gold palette đồng bộ (dùng cho viền đinh tán…)
-const GOLD = {
-  base: "#D4AF37",
-  deep: "#B8860B",
-  glow: "#FFE9A6",
-};
-
-const DATA = [
-  { id:"docker",    name:"Docker",     type:"DevOps",   rarity:"legendary", level: 85, img:"/src/assets/tools/docker.svg",
-    desc:"Containerization • images • Compose • multi-stage builds",
-    passives:["+Reproducibility","+Isolation"], mastered:true },
-  { id:"github",    name:"GitHub",     type:"VCS",      rarity:"epic",      level: 82, img:"/src/assets/tools/github.svg",
-    desc:"PRs • Actions • Issues • Releases", passives:["+Collab","+CI"], mastered:true },
-  { id:"node",      name:"Node.js",    type:"Backend",  rarity:"epic",      level: 80, img:"/src/assets/tools/node.svg",
-    desc:"APIs • Socket.io • Tooling", passives:["+Throughput"], mastered:true },
-  { id:"react",     name:"React",      type:"Frontend", rarity:"epic",      level: 78, img:"/src/assets/tools/react.svg",
-    desc:"SPA • Hooks • State mgmt", passives:["+DX"], mastered:true },
-  { id:"vite",      name:"Vite",       type:"Build",    rarity:"rare",      level: 76, img:"/src/assets/tools/vite.svg",
-    desc:"Dev server • Build • HMR", passives:["+Speed"], mastered:true },
-  { id:"tailwind",  name:"Tailwind",   type:"Frontend", rarity:"rare",      level: 74, img:"/src/assets/tools/tailwind.svg",
-    desc:"Utility-first CSS • Design system", passives:["+Consistency"], mastered:true },
-  { id:"sonar",     name:"SonarQube",  type:"Quality",  rarity:"rare",      level: 73, img:"/src/assets/tools/sonarqube.svg",
-    desc:"Static analysis • Quality Gates", passives:["+Safety","+Clean Code"], mastered:true },
-  { id:"jest",      name:"Jest",       type:"Testing",  rarity:"rare",      level: 71, img:"/src/assets/tools/jest.svg",
-    desc:"Unit tests • Coverage • Watch", passives:["+Confidence"], mastered:true },
-  { id:"vscode",    name:"VSCode",     type:"IDE",      rarity:"common",    level: 88, img:"/src/assets/tools/vscode.svg",
-    desc:"Editor • Debugger • Extensions", passives:["+Velocity"], mastered:true },
-  { id:"git",       name:"Git",        type:"VCS",      rarity:"legendary", level: 90, img:"/src/assets/tools/git.svg",
-    desc:"Branching • Rebase • Cherry-pick", passives:["+Control"], mastered:true },
-];
-
-const tabs = ["All","Frontend","Backend","DevOps","VCS","Build","Quality","Testing","IDE"];
+import { rarityStyle, GOLD, tabs, DATA } from "@data/inventory.js";
 
 function Slot({ item, selected, onSelect }) {
   const frame =

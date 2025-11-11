@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Crown, Swords, Scroll, Medal, Sparkles, Gauge, Quote, Code2, TerminalSquare, Bug } from "lucide-react";
-import { tiers } from "../data/stats"
-import { CG_COLORS } from "../data/codingame"
-import  codingameLogoUrl  from "../assets/codingame-logo.png"
+import { tiers } from "@data/stats"
+import { CG_COLORS } from "@data/codingame"
+import  codingameLogoUrl  from "@assets/codingame-logo.png"
 
 function tierKey(t="") {
   return t.trim().toLowerCase();            // "grand master" giữ khoảng trắng

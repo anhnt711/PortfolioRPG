@@ -7,7 +7,6 @@
   --font-body: "Spectral", ui-serif, Georgia, "Times New Roman", serif;
 }
 
-/* Khử faux-bold, bật khử răng cưa */
 html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -40,7 +39,7 @@ nav button, .nav-btn, .nav-cta, .brand-subtitle{
 
 /* optional: font + scrollbar nhỏ gọn */
 body {
-  background-image: url('/src/assets/bg-main.jpg');
+  background-image: url('/src/assets/bg/bg-base.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed; /* hiệu ứng parallax nhẹ */

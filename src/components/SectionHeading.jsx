@@ -5,8 +5,6 @@ export default function SectionHeading({
 }) {
   return (
     <div className="bg3-banner">
-      <div className="bg3-banner__dark" />
-      <div className="bg3-banner__grunge" />
 
       <div className="bg3-banner__inner">
         <div className="bg3-banner__text">

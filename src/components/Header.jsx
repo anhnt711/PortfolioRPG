@@ -40,8 +40,8 @@ export default function Header() {
   const sections = useMemo(
     () => [
       { id: "info", label: "Information" },
-      { id: "skills", label: "Skills Tree" },
-      { id: "quests", label: "Milestones" },
+      { id: "inventory", label: "Inventory" },
+      { id: "skilltree", label: "Skills Tree" },
       { id: "projects", label: "Projects" },
       { id: "contact", label: "Contact" },
     ],
