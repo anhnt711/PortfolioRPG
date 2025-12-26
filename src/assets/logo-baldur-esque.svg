@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="140" viewBox="0 0 360 140" role="img" aria-labelledby="title desc">
+  <title id="title">Tien Anh crest</title>
+  <desc id="desc">Ornate fantasy gold crest logo for portfolio</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0b0a"/>
+      <stop offset="50%" stop-color="#1a0f0e"/>
+      <stop offset="100%" stop-color="#111620"/>
+    </linearGradient>
+    <linearGradient id="goldFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff5d6"/>
+      <stop offset="40%" stop-color="#f3d48b"/>
+      <stop offset="70%" stop-color="#d29a3c"/>
+      <stop offset="100%" stop-color="#8c5a20"/>
+    </linearGradient>
+    <linearGradient id="goldStroke" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f6e0b4"/>
+      <stop offset="100%" stop-color="#5c3712"/>
+    </linearGradient>
+    <filter id="outerGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 0.85 0 0 0  0 0 0.65 0 0  0 0 0 0.7 0" result="colored"/>
+      <feMerge>
+        <feMergeNode in="colored"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="innerGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="shadow"/>
+      <feOffset dx="0" dy="1" in="shadow" result="offset"/>
+      <feMerge>
+        <feMergeNode in="offset"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#f8e4b8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f8e4b8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g filter="url(#outerGlow)">
+    <path d="M48 20h264c12 0 22 10 22 22v56c0 12-10 22-22 22H48c-12 0-22-10-22-22V42c0-12 10-22 22-22z" fill="url(#bg)" stroke="url(#goldStroke)" stroke-width="3" rx="18" ry="18"/>
+    <path d="M60 28h240c8 0 14 6 14 14v44c0 8-6 14-14 14H60c-8 0-14-6-14-14V42c0-8 6-14 14-14z" fill="none" stroke="rgba(239,205,133,0.38)" stroke-width="1.4"/>
+    <circle cx="45" cy="32" r="6" fill="url(#goldFill)" stroke="url(#goldStroke)" stroke-width="1.5" filter="url(#innerGlow)"/>
+    <circle cx="315" cy="32" r="6" fill="url(#goldFill)" stroke="url(#goldStroke)" stroke-width="1.5" filter="url(#innerGlow)"/>
+    <circle cx="45" cy="108" r="6" fill="url(#goldFill)" stroke="url(#goldStroke)" stroke-width="1.5" filter="url(#innerGlow)"/>
+    <circle cx="315" cy="108" r="6" fill="url(#goldFill)" stroke="url(#goldStroke)" stroke-width="1.5" filter="url(#innerGlow)"/>
+    <ellipse cx="180" cy="70" rx="95" ry="46" fill="url(#centerGlow)" opacity="0.5"/>
+    <text x="50%" y="64%" text-anchor="middle" font-family="'Cinzel Decorative','Cinzel','Trajan Pro','Times New Roman',serif" font-size="44" font-weight="700" fill="url(#goldFill)" stroke="url(#goldStroke)" stroke-width="2" paint-order="stroke fill" letter-spacing="1.6" filter="url(#innerGlow)">
+      Tien Anh
+    </text>
+    <text x="50%" y="78%" text-anchor="middle" font-family="'EB Garamond','Times New Roman',serif" font-size="16" font-weight="600" fill="url(#goldFill)" letter-spacing="6" opacity="0.92" filter="url(#innerGlow)">
+      PORTFOLIO RPG
+    </text>
+  </g>
+</svg>

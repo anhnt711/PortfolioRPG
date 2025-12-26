@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --gold1:#f5d78a;
   --gold2:#eab54e;
   --gold3:#b88a2a;
@@ -11,12 +11,12 @@
   margin-top: .25rem;
   margin-bottom: 1.5rem;
   overflow: hidden;
+  text-align: left;
 }
 
 .bg3-banner__inner{
   position: relative;
-  max-width: 72rem; /* ~max-w-6xl */
-  margin-inline: auto;
+  width: 100%;
 }
 
 
@@ -56,6 +56,24 @@
   color: rgba(255, 251, 235, .9);
 }
 
+.bg3-banner__tagline-wrap{
+  margin-top: .65rem;
+}
+
+.bg3-banner__rule--full{
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-image: linear-gradient(to right, rgba(251,191,36,.9), rgba(255, 248, 220, .6));
+  margin-bottom: .4rem;
+}
+
+.bg3-banner__tagline{
+  font-size: 1.05rem;
+  color: rgba(255, 251, 235, .92);
+  font-weight: 600;
+}
+
 
 /* ---------------------------------------------
    File: rpg-hero.css (shared styles for both panels)
@@ -78,6 +96,38 @@
   box-shadow: 0 20px 40px rgba(2,6,23,.6), inset 0 0 0 1px rgba(251,191,36,.12);
   color: var(--rpg-fg);
   border: 1px solid rgba(251,191,36,.35);
+}
+/* Intro hero variant: remove hard borders, lift softly */
+.intro-hero .rpg-card { background: transparent; border: none; box-shadow: none; }
+.intro-hero .rpg-panel { padding: 0; min-height: auto; }
+.intro-cluster {
+  position: relative;
+  padding: 16px;
+  border-radius: 24px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+}
+.intro-cluster--left {
+  background: radial-gradient(140% 120% at 20% 20%, rgba(211,180,106,0.16), rgba(0,0,0,0));
+}
+.intro-cluster--right {
+  background: radial-gradient(140% 120% at 80% 20%, rgba(99,102,241,0.12), rgba(0,0,0,0));
+}
+@media (min-width: 1024px) {
+  .intro-cluster { padding: 22px; }
+}
+.intro-divider {
+  position: absolute;
+  inset: 8% auto 8% 50%;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(211,180,106,0), rgba(211,180,106,0.5), rgba(211,180,106,0));
+  opacity: 0.5;
+  pointer-events: none;
+  transform: translateX(-0.5px);
+  display: none;
+}
+@media (min-width: 1024px) {
+  .intro-divider { display: block; }
 }
 /* Make panels participate in equal height */
 .rpg-panel { padding: 16px; min-height: var(--heroMinH); height: 100%; display: flex; flex-direction: column; }
@@ -132,11 +182,33 @@
 .rpg-item { display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(251,191,36,.25); background: rgba(255,255,255,.06); padding: 8px 10px; border-radius: 10px; }
 .rpg-item-key { color: rgba(226,232,240,.9); }
 .rpg-item-val { font-weight: 700; color: #fefce8; }
+.rpg-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 18px rgba(211,180,106,0.3);
+  border-color: rgba(211,180,106,0.6);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
 
-/* ==== Avatar Shield (giống mẫu) ==== */
+.intro-hero .radar-rune {
+  opacity: 0.65;
+}
+
+.radar-item {
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  padding: 8px 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+}
+.radar-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(211,180,106,0.25);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+/* ==== Avatar Shield (giß+æng mß¦½u) ==== */
 .rpg-shield{
   position: relative;
-  width: 150px;            /* bạn có thể đổi 136–160 tùy layout */
+  width: 150px;            /* bß¦ín c+¦ thß+â -æß+òi 136GÇô160 t+¦y layout */
   flex: 0 0 auto;
 }
 
@@ -158,7 +230,7 @@
   box-shadow: 0 2px 0 rgba(0,0,0,.25);
 }
 .rpg-ribbon::after{
-  /* đuôi ribbon */
+  /* -æu+¦i ribbon */
   content: "";
   position: absolute;
   right: 6px; top: 100%;
@@ -168,7 +240,7 @@
   filter: brightness(0.9);
 }
 
-/* Khung khiên: nền + 2 đường viền */
+/* Khung khi+¬n: nß+ün + 2 -æ¦¦ß+¥ng viß+ün */
 .rpg-shield-frame{
   position: relative;
   padding: 18px 14px 28px;
@@ -189,15 +261,15 @@
   border-radius: 6px;
 }
 .rpg-shield-frame::before{
-  border: 1px solid rgba(203,213,225,.28);   /* viền ngoài nhạt */
+  border: 1px solid rgba(203,213,225,.28);   /* viß+ün ngo+ái nhß¦ít */
   transform: scale(1.01);
 }
 .rpg-shield-frame::after{
-  border: 1px solid rgba(56,189,248,.4);     /* viền trong xanh */
+  border: 1px solid rgba(56,189,248,.4);     /* viß+ün trong xanh */
   transform: scale(0.985);
 }
 
-/* Vòng avatar tròn với viền sáng */
+/* V+¦ng avatar tr+¦n vß+¢i viß+ün s+íng */
 .rpg-portrait-ring{
   display:grid; place-items:center;
   width: 92px; height: 92px;
@@ -213,6 +285,28 @@
   border-radius: 999px;
   object-fit: cover;
   filter: contrast(1.02) saturate(1.05);
+}
+
+.rpg-portrait-ring:hover {
+  box-shadow: 0 0 24px rgba(211,180,106,0.6), 0 0 0 2px rgba(211,180,106,0.4);
+  transition: box-shadow .25s ease, transform .25s ease;
+  transform: translateY(-2px);
+}
+.rpg-portrait-ring:hover::after{
+  content: "Click to see full story";
+  position: absolute;
+  bottom: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(17,24,39,0.9);
+  color: #fefce8;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(211,180,106,0.5);
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  pointer-events: none;
 }
 
 /* Caption trong khung */
@@ -234,9 +328,9 @@
   color: rgba(226, 232, 240, .85);
 }
 
-/* cho .rpg-portrait-ring làm mốc định vị */
+/* cho .rpg-portrait-ring l+ám mß+æc -æß+ïnh vß+ï */
 .rpg-portrait-ring{
-  position: relative; /* <-- thêm dòng này */
+  position: relative; /* <-- th+¬m d+¦ng n+áy */
   display: grid; place-items: center;
   width: 92px; height: 92px;
   margin: 6px auto 10px;
@@ -258,14 +352,14 @@
   box-shadow: 0 2px 4px rgba(2,8,23,.35);
 }
 
-/* vị trí mới: dính vào vòng avatar, góc dưới-phải */
+/* vß+ï tr+¡ mß+¢i: d+¡nh v+áo v+¦ng avatar, g+¦c d¦¦ß+¢i-phß¦úi */
 .rpg-shield-crest--on-avatar{
   position: absolute;
-  right: -4px;   /* hơi tràn ra ngoài cho “đè khung” */
+  right: -4px;   /* h¦íi tr+án ra ngo+ái cho GÇ£-æ+¿ khungGÇ¥ */
   bottom: -2px;
 }
 
-/* Gom sát các dòng bên phải avatar */
+/* Gom s+ít c+íc d+¦ng b+¬n phß¦úi avatar */
 .rpg-meta--compact .rpg-status--tight { margin-top: 2px; }
 .rpg-meta--compact .rpg-name-row .rpg-name-icon { margin-right: 6px; }
 
@@ -276,7 +370,7 @@
   border-radius: 1px;
 }
 
-/* Rank line kiểu Codingame */
+/* Rank line kiß+âu Codingame */
 .rpg-rank{
   display:flex; align-items: center; gap:8px;
 }
@@ -289,7 +383,7 @@
 .rpg-rank-pts{ color: rgba(255,255,255,.8); font-weight: 500; }
 .rpg-rank-sub{ font-size: 12px; color: rgba(255,255,255,.65); margin-top:2px; }
 
-/* Màu theo tier (tuỳ biến theo theme của bạn) */
+/* M+áu theo tier (tuß+¦ biß¦+n theo theme cß+ºa bß¦ín) */
 .rpg-rank--bronze  .rpg-rank-tier{ color: #b87333; }
 .rpg-rank--silver  .rpg-rank-tier{ color: #c0c0c0; }
 .rpg-rank--gold    .rpg-rank-tier{ color: #f1c40f; }
@@ -309,10 +403,10 @@
     rgba(11,15,25,0) 100%
   );
   border-radius: 1px;
-  box-shadow: 0 0 0.5px rgba(255,215,0,.5); /* ánh nhẹ cho “kim loại” */
+  box-shadow: 0 0 0.5px rgba(255,215,0,.5); /* +ính nhß¦¦ cho GÇ£kim loß¦íiGÇ¥ */
 }
 
-/* icon + chữ rank lấy màu theo tier */
+/* icon + chß+» rank lß¦Ñy m+áu theo tier */
 .rpg-rank-icon{ width:16px; height:16px; color: #FFD700; }
 .rpg-rank-tier{ font-weight:700; color: var(--rank-accent, var(--rpg-fg)); }
 .rpg-rank-pts{ color: var(--rank-accent, var(--rpg-fg)); font-weight:500; }
@@ -323,7 +417,7 @@
   margin-bottom: 10px;
 }
 .rpg-rank-brand-logo{
-  height: 16px;           /* chỉnh nhanh size logo */
+  height: 16px;           /* chß+ënh nhanh size logo */
   width: auto;
   object-fit: contain;
   display: block;
@@ -525,16 +619,16 @@
   position: absolute;
   inset: 0;
   right: 0;
-  width: 42%;                      /* vùng ảnh bên phải */
+  width: 42%;                      /* v+¦ng ß¦únh b+¬n phß¦úi */
   background-repeat: no-repeat;
   background-position: right center;
   background-size: cover;
 
-  /* blend kiểu Baldur */
+  /* blend kiß+âu Baldur */
   mix-blend-mode: soft-light;
   filter: brightness(110%) contrast(105%);
 
-  /* mask mờ mép trái */
+  /* mask mß+¥ m+¬p tr+íi */
   mask-image: linear-gradient(to left, black 70%, transparent 100%);
   -webkit-mask-image: linear-gradient(to left, black 70%, transparent 100%);
 
@@ -544,7 +638,7 @@
 }
 
 
-/* hiệu ứng vignette nhẹ để nối với nền chung */
+/* hiß+çu ß+¬ng vignette nhß¦¦ -æß+â nß+æi vß+¢i nß+ün chung */
 .section-blend::after {
   content: "";
   position: absolute;
@@ -552,4 +646,133 @@
   background: radial-gradient(120% 85% at 80% 50%, transparent 60%, rgba(0,0,0,.3));
   pointer-events: none;
   z-index: 0;
+}
+
+.radar-rune {
+  position: absolute;
+  inset: 8% 12%;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(211,180,106,0.08), transparent 50%),
+    radial-gradient(circle at 30% 40%, rgba(99,102,241,0.1), transparent 45%);
+  filter: blur(6px);
+  opacity: 0.8;
+}
+
+/* ---- Intro cinematic hero ---- */
+.intro-cinematic {
+  --intro-bg: none;
+  position: relative;
+  min-height: clamp(540px, 78vh, 920px);
+  display: grid;
+  place-items: center;
+  padding: 140px 24px 120px;
+  text-align: center;
+  color: #f7ead0;
+  overflow: hidden;
+}
+.intro-cinematic__content {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 92vw);
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+}
+.intro-cinematic__glow {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  width: min(520px, 85vw);
+  height: min(520px, 85vw);
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255, 204, 122, 0.25), rgba(0,0,0,0) 60%);
+  filter: blur(6px);
+  opacity: 0.9;
+  z-index: -1;
+}
+.intro-cinematic__avatar {
+  width: min(380px, 70vw);
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 24px 55px rgba(255, 204, 122, 0.25));
+}
+.intro-cinematic__eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(255, 230, 180, 0.7);
+  margin: 0;
+}
+.intro-cinematic__name {
+  margin: 0;
+  font-family: "Cinzel", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 4.2vw, 54px);
+  letter-spacing: 0.2em;
+  color: #f9e8c3;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+.intro-cinematic__role {
+  margin: 0;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: rgba(255, 219, 160, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.intro-cinematic__motto {
+  margin: 8px 0 12px;
+  font-style: italic;
+  color: rgba(247, 234, 208, 0.75);
+}
+.intro-cinematic__rule {
+  display: block;
+  width: min(360px, 60vw);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 204, 122, 0), rgba(255, 204, 122, 0.9), rgba(255, 204, 122, 0));
+  box-shadow: 0 0 14px rgba(255, 204, 122, 0.35);
+}
+.intro-cinematic__actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.intro-cta {
+  min-width: 160px;
+  padding: 10px 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 204, 122, 0.5);
+  color: #f8e9c8;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(0,0,0,0.45);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.35), 0 10px 20px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.intro-cta--primary {
+  background: linear-gradient(180deg, rgba(255, 210, 140, 0.18), rgba(0,0,0,0.5));
+  border-color: rgba(255, 204, 122, 0.9);
+  box-shadow: 0 0 20px rgba(255, 204, 122, 0.2), 0 12px 30px rgba(0,0,0,0.55);
+}
+.intro-cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 204, 122, 0.9);
+  box-shadow: 0 0 20px rgba(255, 204, 122, 0.25), 0 14px 32px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 640px) {
+  .intro-cinematic {
+    padding: 120px 18px 90px;
+  }
+  .intro-cinematic__actions {
+    gap: 12px;
+  }
+  .intro-cta {
+    min-width: 140px;
+  }
 }

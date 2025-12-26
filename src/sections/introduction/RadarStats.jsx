@@ -18,11 +18,7 @@ export default function RadarStats({ title = "Skill Radar", stats = [] }) {
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={data} outerRadius="80%">
             <PolarGrid stroke="rgba(251,191,36,.25)" />
-            <PolarAngleAxis
-              dataKey="label"
-              tick={{ fill: "var(--rpg-fg)" }}
-              stroke="transparent"
-            />
+            <PolarAngleAxis dataKey="label" tick={{ fill: "var(--rpg-fg)" }} stroke="transparent" />
             <PolarRadiusAxis
               angle={90}
               domain={[0, 100]}
@@ -38,11 +34,7 @@ export default function RadarStats({ title = "Skill Radar", stats = [] }) {
                 color: "#fefce8",
               }}
             />
-            <Radar
-              dataKey="value"
-              fill="rgba(251, 191, 36, .65)"
-              stroke="rgba(120, 53, 15, .8)"
-            />
+            <Radar dataKey="value" fill="rgba(251, 191, 36, .65)" stroke="rgba(120, 53, 15, .8)" />
           </RadarChart>
         </ResponsiveContainer>
       </div>
@@ -58,4 +50,3 @@ export default function RadarStats({ title = "Skill Radar", stats = [] }) {
     </div>
   );
 }
-

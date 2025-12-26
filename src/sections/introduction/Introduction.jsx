@@ -1,22 +1,28 @@
-// src/sections/Introduction.jsx
-import Hero from "./Hero";
-import RadarStats from "./RadarStats";
-import { heroInfo, radarStats } from "@data/stats";
+import introBgUrl from "@assets/bg/background.png";
+import avatarUrl from "@assets/avatar.png";
+
+const introCopy = {
+  name: "NGUYEN TIEN ANH",
+  role: "Full-stack Engineer / QA Mindset",
+  motto: "Clarity first. Ship small. Reverse safely.",
+};
 
 export default function Introduction() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
-       <Hero
-          name = "Nguyen Tien Anh"
-          status = "On Quest: Snake Game"
-          avatarUrl = "/assets/avatar.jpg"
-          rankScore = {15}
-          flow = {86}            
-          alignment = "Neutral Good"
-          personal_motto = "Clarity first, safety always, speed by design—small, reversible changes that ship value every day."
-          classToken = "Developer"
-        />
-      <RadarStats stats={radarStats} />
-    </div>
+    <section className="intro-cinematic" style={{ "--intro-bg": `url(${introBgUrl})` }}>
+      <div className="intro-cinematic__content">
+        <div className="intro-cinematic__glow" aria-hidden />
+        <img className="intro-cinematic__avatar" src={avatarUrl} alt="Nguyen Tien Anh avatar" />
+        <p className="intro-cinematic__eyebrow">Information</p>
+        <h1 className="intro-cinematic__name">{introCopy.name}</h1>
+        <p className="intro-cinematic__role">{introCopy.role}</p>
+        <p className="intro-cinematic__motto">{introCopy.motto}</p>
+        <span className="intro-cinematic__rule" aria-hidden />
+        <div className="intro-cinematic__actions">
+          <a className="intro-cta intro-cta--primary" href="#projects">Inspect</a>
+          <a className="intro-cta" href="#contact">Recruit</a>
+        </div>
+      </div>
+    </section>
   );
 }

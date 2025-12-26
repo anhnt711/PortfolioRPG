@@ -20,4 +20,5 @@ export default defineConfig({
       '@styles': path.resolve(__dirname, 'src/styles'),
     },
   },
+  assetsInclude: ['**/*.glb'],
 })

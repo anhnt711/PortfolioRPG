@@ -34,11 +34,8 @@ export default function SkillTree() {
           animate={{ opacity: 1, y: 0 }}
           className="col-span-8 rounded-2xl border border-stone-700/70 bg-stone-950/60 p-4"
         >
-          <div className="text-sm text-stone-400 px-1 pb-2">
-            Skill Trees
-          </div>
+          <div className="text-sm text-stone-400 px-1 pb-2">Skill Trees</div>
 
-          {/* horizontal scroll of columns */}
           <div className="overflow-x-auto no-scrollbar">
             <div className="flex gap-4 min-h-[460px]">
               {SKILL_COLUMNS.map((col) => (
@@ -56,7 +53,6 @@ export default function SkillTree() {
           </div>
         </motion.div>
 
-        {/* RIGHT: details panel */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
