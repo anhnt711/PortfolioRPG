@@ -58,13 +58,13 @@ export default function App() {
                 <Introduction />
               </Section>
 
-              <Section id="skills" classname="px-0 py-0" maxWidthClass="max-w-none">
+              {/* <Section id="skills" classname="px-0 py-0" maxWidthClass="max-w-none">
                 <SkillsTree />
-              </Section>
-{/* 
+              </Section> */}
+
               <Section id="projects">
                 <Projects />
-              </Section> */}
+              </Section>
 
               <Section id="contact">
                 <Contact />
