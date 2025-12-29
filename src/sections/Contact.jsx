@@ -150,7 +150,7 @@ export default function ContactSection() {
               </span>
             </div>
 
-            <p className="mt-6 text-xs text-white/55">
+            <p className="mt-6 text-xs text-white">
               Typical response time: under 24 hours.
             </p>
           </div>
@@ -205,7 +205,7 @@ export default function ContactSection() {
                               • {it.hint}
                             </span>
                           </div>
-                          <p className="truncate text-xs text-white/65">
+                          <p className="truncate text-xs text-white">
                             {it.value}
                           </p>
                         </div>
