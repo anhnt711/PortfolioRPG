@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import Section from "./components/Section";
-import Introduction from "@sections/introduction/Introduction";
+import Introduction from "@sections/Introduction";
 import Projects from "@sections/Projects";
-import SkillsTree from "@sections/skillstree/SkillsTree";
+import SkillsTree from "@sections/SkillsTree";
 import Contact from "@sections/Contact";
 import Begin from "./pages/Begin";
 
@@ -54,39 +54,19 @@ export default function App() {
             <div className="fixed inset-0 -z-10" />
 
             <main className="mx-auto pb-20 space-y-14">
-              <Section
-                id="intro"
-                title="Introduction"
-                subline="skill & identity"
-                tagline="Nguyen Tien Anh - Code Disciple on his RPG Journey"
-                fullRule
-                variant="scroll"
-                align="left"
-                showHeading={false}
-                classname="section-blend-intro px-0 py-0"
-                maxWidthClass="max-w-none"
-              >
+              <Section id="intro" classname="section-blend-intro px-0 py-0" maxWidthClass="max-w-none">
                 <Introduction />
               </Section>
 
-              <Section
-                id="skills"
-                title="Skills-Tree"
-                subline="Growth map"
-                variant="scroll"
-                align="left"
-                showHeading={false}
-                classname="px-0 py-0"
-                maxWidthClass="max-w-none"
-              >
+              <Section id="skills" classname="px-0 py-0" maxWidthClass="max-w-none">
                 <SkillsTree />
               </Section>
-
-              <Section id="projects" title="Projects" subline="Quest log" variant="scroll" align="left">
+{/* 
+              <Section id="projects">
                 <Projects />
-              </Section>
+              </Section> */}
 
-              <Section id="contact" title="Contact" subline="Send a quest scroll" variant="scroll" align="left">
+              <Section id="contact">
                 <Contact />
               </Section>
             </main>
