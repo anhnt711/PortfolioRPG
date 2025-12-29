@@ -2,48 +2,71 @@
   position: relative;
   overflow: hidden;
   border-radius: 24px;
-  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05), rgba(8,8,15,0.95)),
-    linear-gradient(120deg, #0f0b1e, #161826, #0f0b1e);
-  padding: 24px 0;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  background-image: url("/src/assets/bg/background.png");
+  background-size: cover;
+  background-position: center;
+  padding: 70px 0 60px;
+  color: #f6e7c1;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
 .constellation__bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(211,180,106,0.12), transparent 45%),
-    radial-gradient(circle at 80% 50%, rgba(99,102,241,0.12), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(56,189,248,0.08), transparent 50%);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 200, 120, 0.18), rgba(0,0,0,0) 55%);
   pointer-events: none;
 }
 
 .constellation__inner {
   position: relative;
   z-index: 1;
-  max-width: 1280px;
+  max-width: 1220px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.constellation__header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.constellation__title {
+  margin: 0;
+  font-family: "Cinzel", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #f8e9c8;
+}
+
+.constellation__subtitle {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 224, 180, 0.82);
+}
+
+.constellation__rule {
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 204, 122, 0), rgba(255, 204, 122, 0.9), rgba(255, 204, 122, 0));
 }
 
 .constellation__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-@media (min-width: 1024px) {
-  .constellation__grid {
-    grid-template-columns: 1.7fr 1fr;
-  }
+  gap: 0;
 }
 
 .constellation__map {
   position: relative;
-  height: 540px;
+  height: clamp(420px, 54vw, 600px);
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.5));
+  background: transparent;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.04);
 }
 
 .constellation__svg {
@@ -51,116 +74,139 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  opacity: 0.9;
 }
 
 .skill-node {
   position: absolute;
-  min-width: 110px;
-  text-align: center;
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.65));
-  color: #fefce8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  color: #f9e7c1;
   cursor: pointer;
-  transition: box-shadow .2s ease, transform .2s ease;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  padding: 0;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
-.skill-node--mastered {
-  box-shadow: 0 0 0 1px rgba(251,191,36,0.6), 0 12px 32px rgba(251,191,36,0.2);
-}
-.skill-node--progress {
-  box-shadow: 0 0 0 1px rgba(56,189,248,0.6), 0 12px 32px rgba(56,189,248,0.2);
-}
-.skill-node--planned {
-  box-shadow: 0 0 0 1px rgba(148,163,184,0.5), 0 12px 24px rgba(148,163,184,0.18);
-  opacity: 0.9;
-}
-.skill-node--active {
-  box-shadow: 0 0 0 2px rgba(251,191,36,0.8), 0 16px 40px rgba(251,191,36,0.3);
+.skill-node__star {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: radial-gradient(circle, #fff7d1 0%, #f3b64d 45%, rgba(0,0,0,0) 70%);
+  box-shadow: 0 0 12px rgba(255, 214, 138, 0.7);
 }
 
 .skill-node__label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.skill-node--center .skill-node__star {
+  width: 18px;
+  height: 18px;
+  box-shadow: 0 0 28px rgba(255, 214, 138, 0.9);
+}
+
+.skill-node--center .skill-node__label {
+  font-size: 14px;
   font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.02em;
+}
+
+.skill-node--domain .skill-node__star {
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 20px rgba(255, 214, 138, 0.8);
+}
+
+.skill-node--active .skill-node__star {
+  box-shadow: 0 0 28px rgba(255, 214, 138, 1), 0 0 60px rgba(255, 214, 138, 0.6);
+}
+
+.skill-node--mastered .skill-node__star {
+  box-shadow: 0 0 24px rgba(255, 214, 138, 0.9);
+}
+
+.skill-node--progress .skill-node__star {
+  box-shadow: 0 0 18px rgba(255, 214, 138, 0.7);
+  opacity: 0.9;
+}
+
+.skill-node--planned .skill-node__star {
+  opacity: 0.6;
 }
 
 .skill-tooltip {
   position: absolute;
-  background: rgba(10,12,20,0.95);
-  color: #fefce8;
-  padding: 6px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(251,191,36,0.4);
+  background: rgba(12, 10, 8, 0.92);
+  color: #fef3c7;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 204, 122, 0.5);
   font-size: 12px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.45);
   pointer-events: none;
 }
 .skill-tooltip__title { font-weight: 700; }
-.skill-tooltip__meta { color: rgba(255,255,255,0.8); font-size: 11px; }
-
-.constellation__panel {
-  min-height: 220px;
+.skill-tooltip__meta { color: rgba(255,255,255,0.75); font-size: 11px; }
+.skill-tooltip__list {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: rgba(255, 224, 180, 0.9);
+}
+.skill-tooltip__list li {
+  margin: 2px 0;
 }
 
-.panel {
-  height: 100%;
-  border-radius: 18px;
-  padding: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.5));
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 16px 36px rgba(0,0,0,0.4);
-  color: #fefce8;
-}
-
-.panel__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-.panel__eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(254,249,195,0.75);
-}
-.panel__title {
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.2;
-}
-.panel__badge {
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  text-transform: capitalize;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.panel__badge--mastered { background: rgba(251,191,36,0.18); color: #fcd34d; }
-.panel__badge--progress { background: rgba(56,189,248,0.18); color: #7dd3fc; }
-.panel__badge--planned { background: rgba(148,163,184,0.2); color: #e5e7eb; }
-
-.panel__meta {
-  margin-top: 6px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.8);
-}
-.panel__desc {
-  margin-top: 10px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.9);
-  line-height: 1.5;
-}
-.panel__project {
-  margin-top: 12px;
-  font-size: 13px;
-  color: rgba(251,191,36,0.95);
-}
-.panel--placeholder {
+.constellation__footer {
+  margin-top: 26px;
   display: grid;
-  place-items: center;
-  color: rgba(255,255,255,0.7);
+  gap: 16px;
+  justify-items: center;
+}
+
+.constellation__axis {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 224, 180, 0.75);
+}
+
+.constellation__axis-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 204, 122, 0.8);
+  box-shadow: 0 0 12px rgba(255, 204, 122, 0.7);
+}
+
+.constellation__hint {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 224, 180, 0.7);
+}
+
+@media (max-width: 640px) {
+  .constellation {
+    padding: 60px 0 50px;
+  }
+  .constellation__title {
+    letter-spacing: 0.22em;
+  }
+  .constellation__subtitle {
+    gap: 10px;
+    font-size: 12px;
+  }
+  .constellation__axis {
+    gap: 12px;
+    text-align: center;
+    flex-wrap: wrap;
+  }
 }

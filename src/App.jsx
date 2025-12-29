@@ -49,7 +49,7 @@ export default function App() {
           <Begin onNavigate={handleHubNavigate} />
         ) : (
           <>
-            <Header />
+            <Header onHome={() => setShowHub(true)} />
 
             <div className="fixed inset-0 -z-10" />
 
@@ -69,7 +69,16 @@ export default function App() {
                 <Introduction />
               </Section>
 
-              <Section id="skills" title="Skills-Tree" subline="Growth map" variant="scroll" align="left">
+              <Section
+                id="skills"
+                title="Skills-Tree"
+                subline="Growth map"
+                variant="scroll"
+                align="left"
+                showHeading={false}
+                classname="px-0 py-0"
+                maxWidthClass="max-w-none"
+              >
                 <SkillsTree />
               </Section>
 
