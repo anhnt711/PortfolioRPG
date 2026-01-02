@@ -53,20 +53,20 @@ export default function App() {
 
             <div className="fixed inset-0 -z-10" />
 
-            <main className="mx-auto pb-20 space-y-14">
+            <main className="mx-auto pb-20 space-y-[clamp(32px,4vw,64px)]">
               <Section id="intro" classname="section-blend-intro px-0 py-0" maxWidthClass="max-w-none">
                 <Introduction />
               </Section>
 
-              {/* <Section id="skills" classname="px-0 py-0" maxWidthClass="max-w-none">
+              <Section id="skills" classname="px-0 py-0" maxWidthClass="max-w-none">
                 <SkillsTree />
-              </Section> */}
-
-              <Section id="projects">
-                <Projects />
               </Section>
 
-              <Section id="contact">
+              {/* <Section id="projects" maxWidthClass="max-w-none">
+                <Projects />
+              </Section> */}
+
+              <Section id="contact" maxWidthClass="max-w-none">
                 <Contact />
               </Section>
             </main>

@@ -235,11 +235,11 @@ export default function ContactSection() {
               </div>
 
               <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
-                <p className="text-xs text-white/55">
+                <p className="text-xs text-white">
                   For hiring: email is the fastest route.
                 </p>
                 <span className="text-xs text-[#c9a86a]/75">
-                  “Clarity first. Ship small.”
+                  “Clarity first.”
                 </span>
               </div>
             </div>

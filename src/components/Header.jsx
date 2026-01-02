@@ -6,7 +6,7 @@ export default function Header({ activeId, onSelect, onHome }) {
     () => [
       { id: "intro", label: "INFORMATION" },
       { id: "skills", label: "SKILLS TREE" },
-      { id: "projects", label: "PROJECTS" },
+      // { id: "projects", label: "PROJECTS" },
       { id: "contact", label: "CONTACT" },
     ],
     []

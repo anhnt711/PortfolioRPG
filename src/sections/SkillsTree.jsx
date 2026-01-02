@@ -44,24 +44,26 @@ const SECTIONS = [
     ],
   },
   {
-    id: "qa",
-    title: "QA Testing",
-    subtitle: "Test strategy, automation, performance",
+    id: "collab",
+    title: "Agile & Collaboration",
+    subtitle: "Planning, reviews, and team delivery workflow",
     skills: [
-      { id: "postman", name: "Postman", level: 4, desc: "API testing, collections, environments.", x: 22, y: 32, tags: ["API"] },
-      { id: "jmeter", name: "JMeter", level: 3, desc: "Load test plans, assertions, reports.", x: 50, y: 18, tags: ["perf"] },
-      { id: "bug", name: "Bug Tracking", level: 4, desc: "Repro steps, triage, severity/priorities.", x: 50, y: 52, tags: ["process"] },
-      { id: "jira", name: "Jira", level: 3, desc: "Boards, workflows, tickets clarity.", x: 78, y: 32, tags: ["agile"] },
-      { id: "playwright", name: "Playwright", level: 3, desc: "E2E automation, reliable selectors.", x: 24, y: 74, tags: ["e2e"] },
-      { id: "selenium", name: "Selenium", level: 2, desc: "Web automation fundamentals.", x: 76, y: 74, tags: ["e2e"] },
+      { id: "collab_gitflow", name: "Git Flow", level: 3, desc: "Feature/release branching, keep history clean.", x: 50, y: 18, tags: ["workflow"] },
+      { id: "collab_pr", name: "PR Review", level: 3, desc: "Comment / Approve / Request changes, review discipline.", x: 22, y: 32, tags: ["code-review"] },
+      { id: "collab_jira", name: "Jira", level: 3, desc: "Backlog, boards, ticket workflow clarity.", x: 78, y: 32, tags: ["agile"] },
+      { id: "collab_scrum", name: "Scrum", level: 3, desc: "Planning, daily, retro; Definition of Done mindset.", x: 50, y: 52, tags: ["rituals"] },
+      { id: "collab_est", name: "Estimation", level: 2, desc: "Story points, velocity vs throughput basics.", x: 24, y: 74, tags: ["planning"] },
+      { id: "collab_docs", name: "Docs & Tickets", level: 3, desc: "Clear requirements, repro steps, acceptance criteria.", x: 76, y: 74, tags: ["clarity"] },
     ],
     edges: [
-      { from: "bug", to: "postman" },
-      { from: "bug", to: "jira" },
-      { from: "bug", to: "jmeter" },
-      { from: "bug", to: "playwright" },
-      { from: "bug", to: "selenium" },
-      { from: "jmeter", to: "postman" },
+      { from: "collab_scrum", to: "collab_pr" },
+      { from: "collab_scrum", to: "collab_jira" },
+      { from: "collab_scrum", to: "collab_gitflow" },
+      { from: "collab_scrum", to: "collab_est" },
+      { from: "collab_scrum", to: "collab_docs" },
+
+      { from: "collab_gitflow", to: "collab_pr" },
+      { from: "collab_jira", to: "collab_docs" },
     ],
   },
   {
@@ -115,15 +117,12 @@ export default function SkillTreePage() {
   }, [selectedSkillId]);
 
   return (
-    <div className="min-h-screen w-full text-[#f3e7c9]">
+    <div className="w-full text-[#f3e7c9]">
       <div className="pointer-events-none fixed inset-0 skilltree-vignette" />
 
-      <main className="mx-auto w-full max-w-[1440px] px-6 py-14">
+      <main className="mx-auto w-full max-w-[1440px] px-6 py-[clamp(32px,5vw,72px)]">
         <header className="mb-8">
           <p className="text-xs tracking-[0.35em] text-[#e6d2a3]/70">SKILLS TREE</p>
-          <h1 className="mt-3 text-3xl md:text-4xl tracking-wide font-semibold">
-            Constellation Skill Map
-          </h1>
           <p className="mt-2 max-w-2xl text-sm md:text-base text-[#e6d2a3]/80">
             Hover to preview. Click a node to inspect details.
           </p>
@@ -167,7 +166,7 @@ function ConstellationCard({ section, selectedSkillId, onSelectSkill }) {
     <section
       ref={cardRef}
       className={[
-        "relative overflow-hidden rounded-2xl p-5 md:p-6",
+        "relative overflow-visible rounded-2xl p-5 md:p-6",
         "skilltree-card",
         spanClass,
       ].join(" ")}
@@ -288,31 +287,31 @@ function ConstellationCard({ section, selectedSkillId, onSelectSkill }) {
 
 /** ---------- Skill Node ---------- */
 function SkillNode({ skill, selected, hovered, onEnter, onMove, onLeave, onClick }) {
-  const pct = levelToPercent(skill.level);
-
   return (
     <button
       type="button"
+      data-level={skill.level}
       className={[
         "absolute -translate-x-1/2 -translate-y-1/2",
-        "skilltree-node",
+        "skilltree-star",
         selected ? "is-selected" : "",
         hovered ? "is-hovered" : "",
       ].join(" ")}
       style={{
         left: `${skill.x}%`,
         top: `${skill.y}%`,
-        "--p": `${pct}%`,
       }}
       onMouseEnter={onEnter}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       onClick={onClick}
       aria-label={skill.name}
+      title={skill.name}
     >
-      <span className="skilltree-node__ring" />
-      <span className="skilltree-node__core">
-        <span className="skilltree-node__label">{skill.name}</span>
+      <span className="skilltree-star__dot" />
+      <span className="skilltree-star__spark" aria-hidden="true" />
+      <span className="skilltree-star__label">
+        {skill.name}
       </span>
     </button>
   );

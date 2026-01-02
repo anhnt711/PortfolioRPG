@@ -1,165 +1,271 @@
-import { useMemo, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { quests } from "@data/quests";
+import { useEffect, useMemo, useState } from "react";
 
-const tabs = [
-  { id: "main", label: "Main quest" },
-  { id: "daily", label: "Daily quest" },
+// Nếu bạn đã có data riêng thì thay thế sampleQuests bằng import của bạn.
+// Ví dụ: import { quests } from "@data/quests";
+
+const TABS = [
+  { id: "main", label: "Main quests" },
+  { id: "daily", label: "Daily quests" },
 ];
 
-const rarityStyles = {
-  Epic: "border-amber-400/70 bg-amber-500/10 text-amber-100",
-  Rare: "border-blue-400/70 bg-blue-500/10 text-blue-100",
-  Common: "border-stone-600/70 bg-stone-800/70 text-stone-200",
-};
+const RARITIES = ["All", "Epic", "Rare", "Common"];
 
-function QuestItem({ quest, active, onSelect }) {
-  return (
-    <motion.button
-      whileHover={{ x: 4 }}
-      whileTap={{ scale: 0.98 }}
-      onClick={() => onSelect(quest)}
-      className={`flex items-center gap-3 w-full rounded-full border px-3 py-2 text-sm transition
-        ${active
-          ? "border-amber-400/70 bg-amber-500/10 text-amber-100 shadow-[0_0_0_1px_rgba(251,191,36,0.25)]"
-          : "border-stone-700/70 bg-stone-900/70 text-stone-200 hover:border-amber-400/50"}`}
-    >
-      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-stone-600/70 bg-stone-800/80 text-[11px] font-semibold">
-        {quest.title.slice(0, 2)}
-      </span>
-      <div className="flex-1 text-left">
-        <div>{quest.title}</div>
-        {quest.rarity && (
-          <span
-            className={`mt-0.5 inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] ${rarityStyles[quest.rarity] || rarityStyles.Common}`}
-          >
-            {quest.rarity}
-          </span>
-        )}
-      </div>
-    </motion.button>
-  );
+const sampleQuests = [
+  {
+    id: "my-portfolio",
+    type: "main",
+    code: "MY",
+    title: "My Portfolio",
+    rarity: "Epic",
+    summary: "RPG-style personal portfolio with day/night vibe.",
+    description:
+      "A cinematic portfolio interface inspired by RPG UI. Focused on clarity, micro-interactions, and a cohesive visual system across sections.",
+    tags: ["React", "Tailwind", "Framer Motion"],
+    meta: { role: "Solo", focus: "UI Craft • System", duration: "Ongoing" },
+    links: { inspect: "#", recruit: "#" },
+    cover: "", // optional image url
+  },
+  {
+    id: "snake-game",
+    type: "main",
+    code: "SN",
+    title: "Snake game",
+    rarity: "Rare",
+    summary: "Retro snake built with vanilla JS and HTML5 Canvas.",
+    description:
+      "Smooth keyboard input, speed scaling, collision detection, and localStorage highscores. Practiced game-loop architecture and clean state management without frameworks.",
+    tags: ["JavaScript", "Canvas", "LocalStorage"],
+    meta: { role: "Solo", focus: "Game loop • Collision", duration: "1–2 weeks" },
+    links: { inspect: "#", recruit: "#" },
+    cover: "", // optional image url
+  },
+  {
+    id: "daily-ui-tweak",
+    type: "daily",
+    code: "UI",
+    title: "Daily UI Tweak",
+    rarity: "Common",
+    summary: "Small UI polish: spacing, hover, responsive fixes.",
+    description:
+      "Quick iteration to keep the UI consistent: typography rhythm, spacing scale, and small hover states aligned with the site visual system.",
+    tags: ["CSS", "UI", "Refactor"],
+    meta: { role: "Solo", focus: "Polish • Consistency", duration: "1–2 hours" },
+    links: { inspect: "#", recruit: "#" },
+    cover: "",
+  },
+];
+
+function clampText(str = "", max = 80) {
+  if (!str) return "";
+  return str.length <= max ? str : str.slice(0, max - 1) + "…";
 }
 
-export default function Projects() {
-  const [tab, setTab] = useState("main");
-  const list = useMemo(() => quests[tab] ?? [], [tab]);
-  const [picked, setPicked] = useState(list[0] ?? null);
+export default function Project() {
+  // Nếu có data thật: const quests = sampleQuests; -> thay bằng quests từ data của bạn
+  const quests = sampleQuests;
 
+  const [tab, setTab] = useState("main");
+  const [rarity, setRarity] = useState("All");
+  const [query, setQuery] = useState("");
+  const [activeId, setActiveId] = useState(null);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return quests
+      .filter((x) => x.type === tab)
+      .filter((x) => (rarity === "All" ? true : x.rarity === rarity))
+      .filter((x) => {
+        if (!q) return true;
+        const hay = `${x.title} ${x.summary} ${x.description} ${(x.tags || []).join(" ")}`.toLowerCase();
+        return hay.includes(q);
+      });
+  }, [quests, tab, rarity, query]);
+
+  const activeQuest = useMemo(() => {
+    return filtered.find((x) => x.id === activeId) || filtered[0] || null;
+  }, [filtered, activeId]);
+
+  // Auto-select first item when filter changes
   useEffect(() => {
-    setPicked(list[0] ?? null);
-  }, [list]);
+    if (!filtered.length) {
+      setActiveId(null);
+      return;
+    }
+    if (!activeId || !filtered.some((x) => x.id === activeId)) {
+      setActiveId(filtered[0].id);
+    }
+  }, [filtered, activeId]);
 
   return (
-    <section className="rounded-2xl border border-stone-700/70 bg-gradient-to-b from-stone-900/70 to-stone-950/80 p-5 shadow-lg">
-      <div className="mb-3 flex items-center justify-between">
-        <div>
-          <div className="text-xs uppercase tracking-wide text-stone-400">Milestone</div>
-          <div className="text-lg font-semibold text-stone-100">Quest Boards</div>
-        </div>
-        <div className="flex gap-2 text-sm">
-          {tabs.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTab(t.id)}
-              className={`rounded-full px-3 py-1 border transition
-                ${tab === t.id
-                  ? "border-amber-400/70 bg-amber-500/10 text-amber-100"
-                  : "border-stone-700/70 bg-stone-900/80 text-stone-300 hover:border-amber-400/60"}`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-      </div>
+    <section className="qb-page" id="projects">
+      <div className="qb-shell">
+        <header className="qb-head">
+          <div className="qb-title">
+            <div className="qb-eyebrow">MILESTONE</div>
+            <h2 className="qb-h2">Quest Boards</h2>
+          </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1.8fr_2fr] gap-4 md:gap-6 items-start">
-        <div className="space-y-2">
-          {list.length === 0 && (
-            <div className="text-sm text-stone-400">No quests yet.</div>
-          )}
-          {list.map((q) => (
-            <QuestItem
-              key={q.id}
-              quest={q}
-              active={picked?.id === q.id}
-              onSelect={setPicked}
-            />
-          ))}
-        </div>
+          <div className="qb-tabs" role="tablist" aria-label="Quest tabs">
+            {TABS.map((t) => (
+              <button
+                key={t.id}
+                className={`qb-tab ${tab === t.id ? "is-active" : ""}`}
+                onClick={() => setTab(t.id)}
+                type="button"
+                role="tab"
+                aria-selected={tab === t.id}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </header>
 
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="rounded-xl border border-stone-700/70 bg-stone-900/70 p-5 space-y-3"
-        >
-          <div className="text-sm text-stone-400">Details</div>
+        <div className="qb-grid">
+          {/* LEFT: LIST */}
+          <aside className="qb-panel qb-left" aria-label="Quest list">
+            <div className="qb-search">
+              <span className="qb-searchIcon" aria-hidden="true">⌕</span>
+              <input
+                className="qb-input"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search..."
+                aria-label="Search quests"
+              />
+            </div>
 
-          {picked ? (
-            <>
-              <div className="rounded-lg border border-dashed border-stone-600/70 bg-stone-950/60 p-3">
-                {picked.thumbnail ? (
-                  <img
-                    src={picked.thumbnail}
-                    alt={picked.title}
-                    className="h-28 w-full rounded-md object-cover"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="grid h-28 place-items-center text-xs text-stone-500">
-                    Thumbnail
-                  </div>
-                )}
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <div className="text-lg font-semibold text-stone-100 leading-snug">
-                    {picked.title}
-                  </div>
-                  {picked.rarity && (
-                    <span
-                      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] ${rarityStyles[picked.rarity] || rarityStyles.Common}`}
+            <div className="qb-filters" aria-label="Rarity filters">
+              {RARITIES.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  className={`qb-filter ${rarity === r ? "is-active" : ""}`}
+                  onClick={() => setRarity(r)}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+
+            <div className="qb-sectionLabel">QUEST LIST</div>
+
+            <div className="qb-list" role="list">
+              {filtered.length === 0 ? (
+                <div className="qb-empty">
+                  No quests found.
+                </div>
+              ) : (
+                filtered.map((q) => {
+                  const isActive = q.id === activeQuest?.id;
+                  return (
+                    <button
+                      key={q.id}
+                      type="button"
+                      className={`qb-item ${isActive ? "is-active" : ""}`}
+                      onClick={() => setActiveId(q.id)}
+                      role="listitem"
                     >
-                      {picked.rarity}
-                    </span>
+                      <div className="qb-itemTop">
+                        <div className="qb-avatar" aria-hidden="true">
+                          {q.code || q.title?.slice(0, 2)?.toUpperCase()}
+                        </div>
+
+                        <div className="qb-itemText">
+                          <div className="qb-itemRow">
+                            <div className="qb-itemTitle">{q.title}</div>
+                            <span className={`qb-badge qb-${(q.rarity || "Common").toLowerCase()}`}>
+                              {q.rarity}
+                            </span>
+                          </div>
+                          <div className="qb-itemSub">{clampText(q.summary, 90)}</div>
+                        </div>
+
+                        <div className="qb-chevron" aria-hidden="true">›</div>
+                      </div>
+                    </button>
+                  );
+                })
+              )}
+            </div>
+          </aside>
+
+          {/* RIGHT: DETAILS */}
+          <main className="qb-panel qb-right" aria-label="Quest details">
+            <div className="qb-sectionLabel">DETAILS</div>
+
+            {!activeQuest ? (
+              <div className="qb-empty qb-emptyRight">
+                Select a quest to view details.
+              </div>
+            ) : (
+              <>
+                <div className="qb-detailHead">
+                  <h3 className="qb-h3">{activeQuest.title}</h3>
+                  <span className={`qb-badge qb-${(activeQuest.rarity || "Common").toLowerCase()}`}>
+                    {activeQuest.rarity}
+                  </span>
+                </div>
+
+                <div className="qb-cover">
+                  {activeQuest.cover ? (
+                    <img className="qb-coverImg" src={activeQuest.cover} alt="" />
+                  ) : (
+                    <div className="qb-coverPh">
+                      <span className="qb-coverIcon" aria-hidden="true">▦</span>
+                      <div className="qb-coverText">Cover preview</div>
+                    </div>
                   )}
                 </div>
-                <p className="mt-2 text-sm text-stone-200/90 leading-relaxed">
-                  {picked.summary}
-                </p>
-                {picked.tech?.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-2 text-[12px] text-stone-200">
-                    {picked.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-stone-700/70 bg-stone-800/70 px-2 py-1"
-                      >
-                        {t}
-                      </span>
-                    ))}
+
+                <p className="qb-desc">{activeQuest.description}</p>
+
+                <div className="qb-tags" aria-label="Tech tags">
+                  {(activeQuest.tags || []).map((t) => (
+                    <span key={t} className="qb-chip">{t}</span>
+                  ))}
+                </div>
+
+                {/* Quest Log removed — replace with compact meta row */}
+                <div className="qb-meta" aria-label="Quest meta">
+                  <div className="qb-metaItem">
+                    <div className="qb-metaKey">Role</div>
+                    <div className="qb-metaVal">{activeQuest.meta?.role || "—"}</div>
                   </div>
-                )}
-                {picked.milestones?.length > 0 && (
-                  <div className="mt-3">
-                    <div className="text-xs uppercase tracking-wide text-stone-400 mb-1">
-                      Quest log
-                    </div>
-                    <div className="space-y-2 border-l border-stone-700/70 pl-3">
-                      {picked.milestones.map((m, idx) => (
-                        <div key={idx} className="relative text-sm text-stone-200/90 leading-snug">
-                          <span className="absolute -left-[9px] mt-1 h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_0_3px_rgba(251,191,36,0.2)]" />
-                          {m}
-                        </div>
-                      ))}
-                    </div>
+                  <div className="qb-metaItem">
+                    <div className="qb-metaKey">Focus</div>
+                    <div className="qb-metaVal">{activeQuest.meta?.focus || "—"}</div>
                   </div>
-                )}
-              </div>
-            </>
-          ) : (
-            <div className="text-sm text-stone-400">Select a quest to see details.</div>
-          )}
-        </motion.div>
+                  <div className="qb-metaItem">
+                    <div className="qb-metaKey">Duration</div>
+                    <div className="qb-metaVal">{activeQuest.meta?.duration || "—"}</div>
+                  </div>
+                </div>
+
+                <div className="qb-actions">
+                  <a
+                    className="qb-btn qb-btnGhost"
+                    href={activeQuest.links?.inspect || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Inspect
+                  </a>
+                  <a
+                    className="qb-btn qb-btnPrimary"
+                    href={activeQuest.links?.recruit || "#"}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Recruit
+                  </a>
+                </div>
+
+                <div className="qb-footerNote">“Clarity first.”</div>
+              </>
+            )}
+          </main>
+        </div>
       </div>
     </section>
   );

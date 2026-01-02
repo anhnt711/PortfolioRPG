@@ -3,8 +3,8 @@ import avatarUrl from "@assets/avatar.png";
 
 const introCopy = {
   name: "NGUYEN TIEN ANH",
-  role: "Full-stack Engineer / QA Mindset",
-  motto: "Clarity first. Ship small. Reverse safely.",
+  role: "Full-stack Engineer",
+  motto: "The most dangerous phrase is, We've always done it this way.",
 };
 
 export default function Introduction() {
