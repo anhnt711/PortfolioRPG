@@ -2,9 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import portfolioCover from "../assets/portfolio-image.png";
 import snakeCover from "../assets/snakegame-image.png";
 
-// Nếu bạn đã có data riêng thì thay thế sampleQuests bằng import của bạn.
-// Ví dụ: import { quests } from "@data/quests";
-
 const TABS = [{ id: "main", label: "Main quests" }];
 
 const RARITIES = ["All", "Epic", "Rare", "Common"];
