@@ -62,9 +62,9 @@ export default function App() {
                 <SkillsTree />
               </Section>
 
-              {/* <Section id="projects" maxWidthClass="max-w-none">
+              <Section id="projects" maxWidthClass="max-w-none">
                 <Projects />
-              </Section> */}
+              </Section>
 
               <Section id="contact" maxWidthClass="max-w-none">
                 <Contact />

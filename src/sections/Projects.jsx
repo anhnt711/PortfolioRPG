@@ -3,10 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 // Nếu bạn đã có data riêng thì thay thế sampleQuests bằng import của bạn.
 // Ví dụ: import { quests } from "@data/quests";
 
-const TABS = [
-  { id: "main", label: "Main quests" },
-  { id: "daily", label: "Daily quests" },
-];
+const TABS = [{ id: "main", label: "Main quests" }];
 
 const RARITIES = ["All", "Epic", "Rare", "Common"];
 
@@ -21,9 +18,9 @@ const sampleQuests = [
     description:
       "A cinematic portfolio interface inspired by RPG UI. Focused on clarity, micro-interactions, and a cohesive visual system across sections.",
     tags: ["React", "Tailwind", "Framer Motion"],
-    meta: { role: "Solo", focus: "UI Craft • System", duration: "Ongoing" },
+    meta: { role: "Solo", focus: "UI Craft", duration: "Ongoing" },
     links: { inspect: "#", recruit: "#" },
-    cover: "", // optional image url
+    cover: "/src/assets/portfolio-image.png",
   },
   {
     id: "snake-game",
@@ -33,11 +30,11 @@ const sampleQuests = [
     rarity: "Rare",
     summary: "Retro snake built with vanilla JS and HTML5 Canvas.",
     description:
-      "Smooth keyboard input, speed scaling, collision detection, and localStorage highscores. Practiced game-loop architecture and clean state management without frameworks.",
-    tags: ["JavaScript", "Canvas", "LocalStorage"],
-    meta: { role: "Solo", focus: "Game loop • Collision", duration: "1–2 weeks" },
+      "Get longer than the rest! In a world where food is scarce, only the longest snake survives. Move smart, slither ahead, and eat everything you can to be the best in our multiplayer snake game.",
+    tags: ["Type Script", "Phaser"],
+    meta: { role: "Team", focus: "Reconciliation • Collision", duration: "1–2 months" },
     links: { inspect: "#", recruit: "#" },
-    cover: "", // optional image url
+    cover: "/src/assets/snakegame-image.png",
   },
   {
     id: "daily-ui-tweak",
@@ -98,26 +95,13 @@ export default function Project() {
 
   return (
     <section className="qb-page" id="projects">
+      <main className="mx-auto w-full max-w-[1440px] px-6 py-[clamp(32px,5vw,72px)]">
+
       <div className="qb-shell">
         <header className="qb-head">
           <div className="qb-title">
             <div className="qb-eyebrow">MILESTONE</div>
             <h2 className="qb-h2">Quest Boards</h2>
-          </div>
-
-          <div className="qb-tabs" role="tablist" aria-label="Quest tabs">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                className={`qb-tab ${tab === t.id ? "is-active" : ""}`}
-                onClick={() => setTab(t.id)}
-                type="button"
-                role="tab"
-                aria-selected={tab === t.id}
-              >
-                {t.label}
-              </button>
-            ))}
           </div>
         </header>
 
@@ -242,31 +226,12 @@ export default function Project() {
                   </div>
                 </div>
 
-                <div className="qb-actions">
-                  <a
-                    className="qb-btn qb-btnGhost"
-                    href={activeQuest.links?.inspect || "#"}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Inspect
-                  </a>
-                  <a
-                    className="qb-btn qb-btnPrimary"
-                    href={activeQuest.links?.recruit || "#"}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Recruit
-                  </a>
-                </div>
-
-                <div className="qb-footerNote">“Clarity first.”</div>
               </>
             )}
           </main>
         </div>
       </div>
+      </main>
     </section>
   );
 }

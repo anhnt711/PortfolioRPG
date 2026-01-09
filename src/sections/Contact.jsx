@@ -128,10 +128,12 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="relative w-full">
+      <main className="mx-auto w-full max-w-[1440px] px-6 py-[clamp(32px,5vw,72px)]">
+
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/35" />
 
-      <div className="relative mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
-        <div className="grid gap-10 md:grid-cols-[340px_1fr] md:items-start">
+      <div className="relative mx-auto w-full px-6 py-20 md:py-24">
+        <div className="grid gap-10 md:grid-cols-[450px_1fr] md:items-start">
           <div>
             <h2 className="text-3xl font-semibold tracking-wide text-[#e7d7b5]">
               Contact
@@ -246,6 +248,7 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+      </main>
     </section>
   );
 }
