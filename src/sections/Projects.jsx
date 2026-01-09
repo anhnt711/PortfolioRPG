@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import portfolioCover from "../assets/portfolio-image.png";
+import snakeCover from "../assets/snakegame-image.png";
 
 // Nếu bạn đã có data riêng thì thay thế sampleQuests bằng import của bạn.
 // Ví dụ: import { quests } from "@data/quests";
@@ -20,7 +22,7 @@ const sampleQuests = [
     tags: ["React", "Tailwind", "Framer Motion"],
     meta: { role: "Solo", focus: "UI Craft", duration: "Ongoing" },
     links: { inspect: "#", recruit: "#" },
-    cover: "/assets/portfolio-image.png",
+    cover: portfolioCover,
   },
   {
     id: "snake-game",
@@ -34,7 +36,7 @@ const sampleQuests = [
     tags: ["Type Script", "Phaser"],
     meta: { role: "Team", focus: "Reconciliation • Collision", duration: "1–2 months" },
     links: { inspect: "#", recruit: "#" },
-    cover: "/assets/snakegame-image.png",
+    cover: snakeCover,
   },
   {
     id: "daily-ui-tweak",
