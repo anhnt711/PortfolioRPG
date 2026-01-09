@@ -20,7 +20,7 @@ const sampleQuests = [
     tags: ["React", "Tailwind", "Framer Motion"],
     meta: { role: "Solo", focus: "UI Craft", duration: "Ongoing" },
     links: { inspect: "#", recruit: "#" },
-    cover: "/src/assets/portfolio-image.png",
+    cover: "/assets/portfolio-image.png",
   },
   {
     id: "snake-game",
@@ -34,7 +34,7 @@ const sampleQuests = [
     tags: ["Type Script", "Phaser"],
     meta: { role: "Team", focus: "Reconciliation • Collision", duration: "1–2 months" },
     links: { inspect: "#", recruit: "#" },
-    cover: "/src/assets/snakegame-image.png",
+    cover: "/assets/snakegame-image.png",
   },
   {
     id: "daily-ui-tweak",
